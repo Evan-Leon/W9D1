@@ -53,8 +53,8 @@ Function.prototype.myBind = function (ctx, ...bindArgs){
   }
 }
   
-const markov = new Cat("Markov");
-const pavlov = new Dog("Pavlov");
+// const markov = new Cat("Markov");
+// const pavlov = new Dog("Pavlov");
 
 
 
@@ -119,10 +119,32 @@ Function.prototype.curry = function(numArgs){
 
 
 
-let f1 = sumThree.curry(3); // tells `f1` to wait until 3 arguments are given before running `sumThree`
-f1 = f1(4); // [Function]
-f1 = f1(20); // [Function]
-f1 = f1(6); // = 30
+// let f1 = sumThree.curry(3); // tells `f1` to wait until 3 arguments are given before running `sumThree`
+// f1 = f1(4); // [Function]
+// f1 = f1(20); // [Function]
+// f1 = f1(6); // = 30
 
-// or more briefly:
-console.log(sumThree.curry(3)(4)(20)(6)); // == 30
+// // or more briefly:
+// console.log(sumThree.curry(3)(4)(20)(6)); // == 30
+
+
+function curriedSum(numArgs){
+    const numbers = [];
+    
+    return function _curriedSum(num){
+        numbers.push(num);
+        if (numbers.length === numArgs){
+            let total = 0;
+            for (let i =0; i < numbers.length; i ++){
+                total += numbers[i];
+            }
+            return total;
+        }else {
+            return _curriedSum; 
+        }
+    }
+
+}
+
+const sum = curriedSum(4);
+console.log(sum(5)(30)(20)(1)); // => 56
