@@ -47,5 +47,5 @@ const ship = new Ship();
 
 // console.log(mo.pirate);
 
-mo.speed 
+
 Asteroid.inherits(MovingObject);
